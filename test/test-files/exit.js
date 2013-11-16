@@ -14,7 +14,7 @@ exports.mocha = function () {
     });
   });
 
-  it(function () {
+  it('process.exit exits with given code', function () {
     console.log('assertion');
     var assert = require('assert');
     assert.strictEqual(this.code, 100);
