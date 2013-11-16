@@ -4,16 +4,15 @@ var exports = exports || {};
 // Code to run inside of mocha
 exports.mocha = function () {
   before(function (done) {
-    var exec = require('child_process').exec;
+    var spawn = require('child_process').spawn;
+    var child = spawn('phantomjs', [this.filepath], {stdio: [0, 'pipe', 2]});
     var that = this;
-    exec('phantomjs ' + this.filepath, function (err, stdout, stderr) {
-      that.stdout = stdout;
-      if (stderr) {
-        console.error(stderr);
-      }
-      if (err) {
-        done(err);
-      }
+    this.stdout = '';
+    child.stdout.on('data', function (buff) {
+      that.stdout += buff;
+    });
+    child.on('exit', function (code, signal) {
+      done();
     });
   });
 
