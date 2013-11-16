@@ -1,4 +1,4 @@
-# phantomjsify
+# phantomjsify [![Build status](https://travis-ci.org/twolfson/phantomjssmith.png?branch=master)](https://travis-ci.org/twolfson/phantomjssmith)
 
 Browserify transform to fallback node basics in PhantomJS
 
