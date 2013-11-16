@@ -6,7 +6,7 @@ exports.mocha = function () {
   before(function (done) {
     console.log('hi2');
     var spawn = require('child_process').spawn;
-    var child = spawn('phantomjs', [__filename], {stdio: [0, 1, 2]});
+    var child = spawn('phantomjs', [this.filepath]);
     var that = this;
     child.on('exit', function (code, signal) {
       that.code = code;

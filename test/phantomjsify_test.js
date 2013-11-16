@@ -1,11 +1,39 @@
+var Browserify = require('browserify');
 var glob = require('glob');
 var Tempfile = require('temporary/lib/file');
-var testFiles = glob.sync('test-files/**/*.js', {cwd: __dirname});
+
+var testFiles = glob.sync(__dirname + '/test-files/**/*.js');
+var phantomjsify = require('../');
 
 describe('phantomjsify', function () {
   testFiles.forEach(function (testFile) {
     describe('executing ' + testFile, function () {
-      var test = require('./' + testFile);
+      before(function bundleFile (done) {
+        // Browserify the test file via phantomjsify
+        var browserify = Browserify(testFile);
+        browserify.transform(phantomjsify);
+        // TODO: Make this not necessary
+        browserify.external('system');
+
+        // Write out the bundle to a temp file
+        var tmp = new Tempfile();
+        this.tmp = tmp;
+        this.filepath = tmp.path;
+        browserify.bundle({
+          standalone: true
+        }, function (err, stream) {
+          if (err) {
+            return done(err);
+          }
+          stream.pipe(tmp).on('end', done);
+        });
+      });
+      after(function (done) {
+        this.tmp.unlink(done);
+      });
+
+      // Execute the testFile
+      var test = require(testFile);
       test.mocha();
     });
   });
