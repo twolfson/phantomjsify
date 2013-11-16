@@ -1,11 +1,12 @@
-var phantomjsify = require('../lib/phantomjsify.js');
+var glob = require('glob');
+var Tempfile = require('temporary/lib/file');
+var testFiles = glob.sync('test-files/**/*.js', {cwd: __dirname});
 
 describe('phantomjsify', function () {
-  before(function () {
-
-  });
-
-  it('', function () {
-
+  testFiles.forEach(function (testFile) {
+    describe('executing ' + testFile, function () {
+      var test = require('./' + testFile);
+      test.mocha();
+    });
   });
 });
