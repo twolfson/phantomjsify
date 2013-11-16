@@ -20,12 +20,12 @@ describe('phantomjsify', function () {
         this.tmp = tmp;
         this.filepath = tmp.path;
         browserify.bundle({
-          standalone: true
-        }, function (err, stream) {
+          standalone: 'phantomjsify-test'
+        }, function (err, src) {
           if (err) {
             return done(err);
           }
-          stream.pipe(tmp).on('end', done);
+          tmp.writeFile(src, done);
         });
       });
       after(function (done) {
