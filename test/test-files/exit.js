@@ -15,6 +15,7 @@ exports.mocha = function () {
   });
 
   it(function () {
+    console.log('assertion');
     var assert = require('assert');
     assert.strictEqual(this.code, 100);
   });
