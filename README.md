@@ -4,10 +4,10 @@
 
 This was built to be able to run option parsers like [commander][] inside of [PhantomJS][].
 
-[Browserify]:
-[node.js]:
-[PhantomJS]:
-[commander]:
+[Browserify]: https://github.com/substack/node-browserify
+[node.js]: http://nodejs.org/
+[PhantomJS]: http://phantomjs.org/
+[commander]: https://github.com/visionmedia/commander.js
 
 ## Getting Started
 Install the module with: `npm install phantomjsify`
@@ -19,7 +19,13 @@ Use it as a transform with [browserify][]:
 browserify --standalone commander --entry node_modules/commander/index.js --transform phantomjsify --external system --outfile vendor/commander.js
 ```
 
-Require
+Inside of your [PhantomJS][] script, load in the browserified file:
+
+```js
+var program = require('./vendor/commander')
+                .parse(process.argv);
+console.log(program); // {"options":[{"flags":"-V, --version", ... "args":[]}
+```
 
 ## Documentation
 It is an aggressive venture to shim over all of [node][]'s functionality, especially across multiple versions. As a result, we are taking only what we need as we need it.
