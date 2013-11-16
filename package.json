@@ -1,6 +1,6 @@
 {
   "name": "phantomjsify",
-  "description": "Browserify transform to fallback node basics in PhantomJS",
+  "description": "Browserify transform to fallback node.js basics in PhantomJS",
   "version": "0.1.0",
   "homepage": "https://github.com/twolfson/phantomjsify",
   "author": {
