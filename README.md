@@ -1,4 +1,4 @@
-# phantomjsify [![Build status](https://travis-ci.org/twolfson/phantomjssmith.png?branch=master)](https://travis-ci.org/twolfson/phantomjssmith)
+# phantomjsify [![Build status](https://travis-ci.org/twolfson/phantomjsify.png?branch=master)](https://travis-ci.org/twolfson/phantomjsify)
 
 [Browserify][] transform to fallback [node.js][] basics in [PhantomJS][]
 
